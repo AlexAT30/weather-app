@@ -6,7 +6,7 @@ import WeatherIcons from "./WeatherIcons";
     <div>
 
       <h2 className='location'>
-        <i class="fas fa-map-marker-alt"></i>
+        <i className="fas fa-map-marker-alt"></i>
         {` ${location.region}, ${location.country}`}
       </h2>
 

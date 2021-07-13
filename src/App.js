@@ -6,9 +6,9 @@ import WeatherApp from './components/WeatherApp';
 const App = () => {
 
   // Variables
-  const [search, setSearch] = useState ('')
-  const [darkModeButton, setDarkModeButton] = useState ("off")
-  const [temp, setTemp] = useState (null)
+  const [darkModeButton, setDarkModeButton] = useState ("off");
+  const [temp, setTemp] = useState (null);
+  const [ubicationError, setUbicationError] = useState (false);
   // Obtener ubicacion
   const [ubication, setUbication] = useState(null);
   const [ubicationData, setUbicationData] = useState(null);
@@ -27,9 +27,15 @@ const App = () => {
     () => {
       if (ubication) {
         const url = `https://api.weatherapi.com/v1/current.json?key=540744b04c96489391303832210907&q=${ubication}&aqi=no`;
-        fetch (url)
-        .then (response => response.json ()
-        .then (data => setUbicationData (data) ));
+        fetch (url).then (response => response.json ().then (data => {
+          if (data.hasOwnProperty ('error')) {
+            setUbicationError (true);
+          }
+          else {
+            setUbicationError (false);
+            setUbicationData (data);
+          }
+        } ));
       }
     }, [ubication]
   );
@@ -56,8 +62,7 @@ const App = () => {
       {
         location && current
         ?
-        <WeatherApp location={location} current={current} search={search} setSearch={setSearch} setUbication={setUbication} darkModeButton={darkModeButton} setDarkModeButton={setDarkModeButton} temp={temp} setTemp={setTemp} />
-        
+        <WeatherApp location={location} current={current} setUbication={setUbication} darkModeButton={darkModeButton} setDarkModeButton={setDarkModeButton} temp={temp} setTemp={setTemp} ubicationError={ubicationError} />
         :
         <LoadingPage />
       }

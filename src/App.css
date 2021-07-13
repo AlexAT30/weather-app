@@ -8,8 +8,6 @@
   --appBlack: #2B2B2B;
   --color1Black: #423F3E;
   --color2Black: #c4c3c3;
-
-
 }
 .centerText {
   text-align: center;
@@ -141,9 +139,30 @@ button {
 input {
   border: none;
 }
+@media (max-width: 500px) {
+  .SearchAndUpdate-off {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .SearchAndUpdate-on {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  input {
+    width: 100%;
+  }
+}
 /* WeatherIcons */
 .WeatherIcons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+}
+@media (max-width: 500px) {
+  .WeatherIcons {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }
